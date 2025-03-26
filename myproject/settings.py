@@ -107,6 +107,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
+
+# Add this line to specify where collected static files should be stored
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Ensure Django looks for static files in the 'static' directory
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
