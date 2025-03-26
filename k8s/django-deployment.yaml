@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: django-blog:latest  # Replace with your built image
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: "myproject.settings"
+            - name: ALLOWED_HOSTS
+              value: "0.0.0.0,127.0.0.1"
+          volumeMounts:
+            - name: static-volume
+              mountPath: /app/static
+      volumes:
+        - name: static-volume
+          persistentVolumeClaim:
+            claimName: django-pvc
