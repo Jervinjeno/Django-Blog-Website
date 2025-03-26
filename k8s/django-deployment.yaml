@@ -15,6 +15,7 @@ spec:
       containers:
         - name: django
           image: django-blog:latest  # Replace with your built image
+          imagePullPolicy: Never
           ports:
             - containerPort: 8000
           env:
